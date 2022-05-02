@@ -1,16 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-require("dotenv").config()
+require("dotenv").config();
 const app = express();
-const cors = require("cors")
+const cors = require("cors");
 const connectDB = require("./config/db");
-const messageRouter = require("./router/sendMessageRouter")
+const messageRouter = require("./router/sendMessageRouter");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({origin: "http://localhost:3000"}))
+app.use(cors({ origin: process.env.ORIGIN }));
 
-connectDB()
-app.use("/",messageRouter)
+connectDB();
+app.use("/", messageRouter);
 app.get("/", (req, res) => {
   res.json("hello");
 });
